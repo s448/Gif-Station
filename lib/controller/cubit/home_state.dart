@@ -1,4 +1,4 @@
-part of 'gif_view_cubit.dart';
+part of 'home_cubit.dart';
 
 @immutable
 abstract class HomeState {}
@@ -13,9 +13,4 @@ class HomeDataLoaded extends HomeState {
 class CategoriesDataLoaded extends HomeState {
   final List<dynamic> categories;
   CategoriesDataLoaded(this.categories);
-}
-
-class SearchedGifsLoaded extends HomeState {
-  final List<dynamic> searchedGifs;
-  SearchedGifsLoaded(this.searchedGifs);
 }

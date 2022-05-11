@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gif_project/constant/strings.dart';
-import 'package:gif_project/controller/cubit/gif_view_cubit.dart';
+import 'package:gif_project/controller/cubit/all_categories_cubit.dart';
+import 'package:gif_project/controller/cubit/home_cubit.dart';
 
 class AllCategories extends StatefulWidget {
   const AllCategories({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _AllCategoriesState extends State<AllCategories> {
     super.initState();
     setState(() {
       allCategories =
-          BlocProvider.of<HomeCubit>(context).getAllCategories('40');
+          BlocProvider.of<AllCategoriesCubit>(context).getAllCategories('40');
     });
   }
 
@@ -27,9 +28,10 @@ class _AllCategoriesState extends State<AllCategories> {
       appBar: AppBar(
         title: const Text('All Categories'),
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocBuilder<AllCategoriesCubit, AllCategoriesState>(
         builder: (context, state) {
-          if (state is CategoriesDataLoaded) {
+          if (state is AllCategoriesDataLoaded) {
+            allCategories = (state).allCategories;
             return ListView.builder(
               itemCount: allCategories.length,
               itemBuilder: (context, index) {

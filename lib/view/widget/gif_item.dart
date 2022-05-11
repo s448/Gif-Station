@@ -12,7 +12,9 @@ class GifItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (() {}),
+      onTap: (() {
+        print(allGifs[i].images.original.url + "dddddddddddddddddddd");
+      }),
       child: Container(
         padding: const EdgeInsets.all(8.0),
         width: MediaQuery.of(context).size.width / 2 - 10,

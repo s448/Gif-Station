@@ -1,42 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gif_project/controller/cubit/view_gifs_cubit.dart';
+import 'package:gif_project/controller/cubit/stickers_view_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
-class GifViewScreen extends StatefulWidget {
-  const GifViewScreen({Key? key, required this.query}) : super(key: key);
-  final String query;
-  // final String limit;
+class StickersScreen extends StatefulWidget {
+  const StickersScreen({Key? key}) : super(key: key);
+
   @override
-  // ignore: no_logic_in_create_state
-  State<GifViewScreen> createState() =>
-      // ignore: no_logic_in_create_state
-      _GifViewScreenState(
-        query: query,
-      );
+  State<StickersScreen> createState() => _StickersScreenState();
 }
 
-class _GifViewScreenState extends State<GifViewScreen> {
-  final String query;
-  // final String limit;
-  List<dynamic> allGifs = [];
-  _GifViewScreenState({
-    required this.query,
-  });
+class _StickersScreenState extends State<StickersScreen> {
+  //empty list to store the returned stickers inside it
+  List<dynamic> allStickers = [];
+
   @override
   void initState() {
     super.initState();
     //now let's initialize the cubit to call our we service
     setState(() {
-      allGifs = BlocProvider.of<ViewGifsCubit>(context).getAllGifs(query);
+      allStickers =
+          BlocProvider.of<StickersViewCubit>(context).getStickers("10");
     });
   }
 
   @override
   void dispose() {
-    allGifs.clear();
-    BlocProvider.of<ViewGifsCubit>(context).close();
+    BlocProvider.of<StickersViewCubit>(context).close();
+    allStickers.clear();
     super.dispose();
   }
 
@@ -44,20 +36,20 @@ class _GifViewScreenState extends State<GifViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(query.toString()),
+        title: const Text("Stickers"),
       ),
-      body: BlocBuilder<ViewGifsCubit, ViewGifsState>(
+      body: BlocBuilder<StickersViewCubit, StickersViewState>(
         builder: (context, state) {
-          if (state is GifsLoaded) {
-            allGifs = (state).gifs;
+          if (state is StickersLoaded) {
+            allStickers = (state).stickers;
             return GridView.builder(
-                itemCount: allGifs.length,
+                itemCount: allStickers.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (context, i) {
                   return GifItem(
-                    allGifs: allGifs, //List of Gifs
+                    allGifs: allStickers, //List of Stickers
                     i: i, //counter
                   );
                 });

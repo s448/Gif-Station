@@ -5,19 +5,26 @@ class HomeRepository {
   HomeRepository(this.homeWebServices);
 
   //for calling the web service to request getting the gifs
-  Future<List<dynamic>> getTrendyGifs(String query, String limit) async {
-    final allGifs = await homeWebServices.getTrendyGifs(query, limit);
+  Future<List<dynamic>> searchForGif(String limit) async {
+    final allGifs = await homeWebServices.searchForGif(limit);
     return allGifs;
   }
 
-  //for calling the web service to request getting the cateories [name,gif url]
-  Future<List<dynamic>> getCategories(String limit) async {
-    final allCategories = await homeWebServices.getCategories(limit);
+  //get categories & all categories
+  Future<List<dynamic>> getCategories(String query) async {
+    final allCategories = await homeWebServices.getCategories(query);
     return allCategories;
   }
 
-  Future<List<dynamic>> getGifs(String query) async {
-    final allGifs = await homeWebServices.searchForGifsAndStickers(query);
-    return allGifs;
+  //get the list of the trendy gifs from the http request of web service
+  Future<List<dynamic>> getTrendyGifs(String limit) async {
+    final allTrendyGifs = await homeWebServices.getTrendyGifs(limit);
+    return allTrendyGifs;
+  }
+
+  //get Lsit of Stickers from http request of web service
+  Future<List<dynamic>> getStickers(String limit) async {
+    final allStickers = await homeWebServices.getStickers(limit);
+    return allStickers;
   }
 }

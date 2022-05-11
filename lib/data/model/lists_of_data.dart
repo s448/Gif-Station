@@ -1,4 +1,4 @@
-List homeButtons = [
+List homeButtonsData = [
   {
     'name': 'Trending',
     'image': 'assets/icons/trend.png',

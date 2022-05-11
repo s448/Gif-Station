@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gif_project/constant/colors.dart';
 
 class SearchBar extends StatelessWidget {
+  final Function(String value) onSubmit;
+
   const SearchBar({
     Key? key,
     required this.searchController,
+    required this.onSubmit,
   }) : super(key: key);
 
   final TextEditingController searchController;
@@ -16,7 +19,7 @@ class SearchBar extends StatelessWidget {
       child: TextFormField(
         controller: searchController,
         cursorColor: primaryColor,
-        onFieldSubmitted: (val) {},
+        onFieldSubmitted: onSubmit,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: "Search for Gifs..",

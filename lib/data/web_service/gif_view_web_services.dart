@@ -15,10 +15,12 @@ class HomeWebServices {
     );
     dio = Dio(options);
   }
-  getTrendyGifs(String query, String limit) async {
+
+  //take parameter query & limit and search for gifs
+  searchForGif(String query) async {
     try {
-      Response response = await dio!
-          .get(searchUrl, queryParameters: {'q': query, 'limit': limit});
+      Response response =
+          await dio!.get(searchUrl, queryParameters: {'q': query});
       GifsModel gifsModel = GifsModel.fromJson(response.data);
       return gifsModel.data as List;
     } catch (e) {
@@ -29,6 +31,7 @@ class HomeWebServices {
     }
   }
 
+  //return the home head categories
   getCategories(String limit) async {
     try {
       Response response =
@@ -44,31 +47,40 @@ class HomeWebServices {
     return [];
   }
 
-  /*
-  used in : 
-  1-search
-  3-trendy gifs
-  4-stickers
-  */
-  searchForGifsAndStickers(String query) async {
+  //trendy gifs section
+  getTrendyGifs(String limit) async {
     try {
       Response response =
-          await dio!.get(searchUrl, queryParameters: {'search': 'animals'});
-      print("ffffffffffffffffffffff   " + response.realUri.toString());
+          await dio!.get(baseUrl, queryParameters: {'limit': limit});
       GifsModel searchedData = GifsModel.fromJson(response.data);
       return searchedData.data as List;
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString() + "ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrrr");
+        print(e.toString() + "Error getting the trendy gifs");
+      }
+    }
+    return [];
+  }
+
+  //get stickers
+  getStickers(String limit) async {
+    try {
+      Response response =
+          await dio!.get(stickersUrl, queryParameters: {'limit': limit});
+      GifsModel searchedData = GifsModel.fromJson(response.data);
+      return searchedData.data as List;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString() + "Error getting the Stickers");
       }
     }
     return [];
   }
 }
 
-      //print(gifsModel.data!.length);
-      // Response response2 =
-      //     await dio!.get("https://api.quran.com/api/v4/chapters?language=en");
-      // CharactersClass charactersClass =
-      //     CharactersClass.fromJson(response2.data);
-      // print(charactersClass.chapters!);
+/*
+  used in : 
+  1-search
+  3-trendy gifs
+  4-stickers
+  */

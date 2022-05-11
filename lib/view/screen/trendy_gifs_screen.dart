@@ -1,35 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif_project/controller/cubit/trendy_gifs_cubit.dart';
 import 'package:gif_project/controller/cubit/view_gifs_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
-class GifViewScreen extends StatefulWidget {
-  const GifViewScreen({Key? key, required this.query}) : super(key: key);
-  final String query;
-  // final String limit;
+class TrendyGifs extends StatefulWidget {
+  const TrendyGifs({Key? key}) : super(key: key);
   @override
-  // ignore: no_logic_in_create_state
-  State<GifViewScreen> createState() =>
-      // ignore: no_logic_in_create_state
-      _GifViewScreenState(
-        query: query,
-      );
+  State<TrendyGifs> createState() => _TrendyGifsState();
 }
 
-class _GifViewScreenState extends State<GifViewScreen> {
-  final String query;
-  // final String limit;
+class _TrendyGifsState extends State<TrendyGifs> {
   List<dynamic> allGifs = [];
-  _GifViewScreenState({
-    required this.query,
-  });
+
   @override
   void initState() {
     super.initState();
     //now let's initialize the cubit to call our we service
     setState(() {
-      allGifs = BlocProvider.of<ViewGifsCubit>(context).getAllGifs(query);
+      allGifs = BlocProvider.of<TrendyGifsCubit>(context).getTrendyGifs("10");
     });
   }
 
@@ -44,12 +34,12 @@ class _GifViewScreenState extends State<GifViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(query.toString()),
+        title: const Text("Trendy Gifs"),
       ),
-      body: BlocBuilder<ViewGifsCubit, ViewGifsState>(
+      body: BlocBuilder<TrendyGifsCubit, TrendyGifsState>(
         builder: (context, state) {
-          if (state is GifsLoaded) {
-            allGifs = (state).gifs;
+          if (state is TrendyGifsLoaded) {
+            allGifs = (state).trendyGifs;
             return GridView.builder(
                 itemCount: allGifs.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
