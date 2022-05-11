@@ -2,23 +2,30 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gif_project/controller/cubit/gif_view_cubit.dart';
+import 'package:gif_project/data/model/gif_model.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
 class GifViewScreen extends StatefulWidget {
-  const GifViewScreen({Key? key}) : super(key: key);
-
+  const GifViewScreen({Key? key, required this.gifArgument}) : super(key: key);
+  final String gifArgument;
   @override
-  State<GifViewScreen> createState() => _GifViewScreenState();
+  // ignore: no_logic_in_create_state
+  State<GifViewScreen> createState() =>
+      // ignore: no_logic_in_create_state
+      _GifViewScreenState(gifArgument: gifArgument);
 }
 
 class _GifViewScreenState extends State<GifViewScreen> {
+  final String gifArgument;
   List<dynamic> allGifs = [];
+  _GifViewScreenState({required this.gifArgument});
   @override
   void initState() {
     super.initState();
     //now let's initialize the cubit to call our we service
     setState(() {
-      allGifs = BlocProvider.of<HomeCubit>(context).getAllGifs();
+      allGifs =
+          BlocProvider.of<HomeCubit>(context).getAllGifs(gifArgument, '100');
     });
   }
 
@@ -26,7 +33,7 @@ class _GifViewScreenState extends State<GifViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("title"),
+        title: Text(gifArgument.toString()),
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {

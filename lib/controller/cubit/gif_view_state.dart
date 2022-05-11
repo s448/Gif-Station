@@ -14,3 +14,8 @@ class CategoriesDataLoaded extends HomeState {
   final List<dynamic> categories;
   CategoriesDataLoaded(this.categories);
 }
+
+class SearchedGifsLoaded extends HomeState {
+  final List<dynamic> searchedGifs;
+  SearchedGifsLoaded(this.searchedGifs);
+}

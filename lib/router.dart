@@ -4,6 +4,7 @@ import 'package:gif_project/constant/strings.dart';
 import 'package:gif_project/controller/cubit/gif_view_cubit.dart';
 import 'package:gif_project/data/repository/gif_view_repository.dart';
 import 'package:gif_project/data/web_service/gif_view_web_services.dart';
+import 'package:gif_project/view/screen/all_categories.dart';
 import 'package:gif_project/view/screen/gif_view_screen.dart';
 import 'package:gif_project/view/screen/home.dart';
 
@@ -24,10 +25,18 @@ class AppRouter {
           ),
         );
       case gifViewScreenRoute:
+        final gifArgument = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => BlocProvider<HomeCubit>(
             create: ((BuildContext context) => homeCubit),
-            child: const GifViewScreen(),
+            child: GifViewScreen(gifArgument: gifArgument),
+          ),
+        );
+      case allCategoriesRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<HomeCubit>(
+            create: ((BuildContext context) => homeCubit),
+            child: const AllCategories(),
           ),
         );
     }

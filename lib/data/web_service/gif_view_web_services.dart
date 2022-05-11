@@ -15,9 +15,10 @@ class HomeWebServices {
     );
     dio = Dio(options);
   }
-  getTrendyGifs() async {
+  getTrendyGifs(String query, String limit) async {
     try {
-      Response response = await dio!.get(baseUrl);
+      Response response = await dio!
+          .get(searchUrl, queryParameters: {'q': query, 'limit': limit});
       GifsModel gifsModel = GifsModel.fromJson(response.data);
       return gifsModel.data as List;
     } catch (e) {
@@ -28,9 +29,10 @@ class HomeWebServices {
     }
   }
 
-  getCategories() async {
+  getCategories(String limit) async {
     try {
-      Response response = await dio!.get(categoryUrl);
+      Response response =
+          await dio!.get(categoryUrl, queryParameters: {'limit': limit});
       CategoryModel categoryModel = CategoryModel.fromJson(response.data);
       return categoryModel.data as List;
     } catch (e) {
@@ -39,6 +41,27 @@ class HomeWebServices {
       }
     }
 
+    return [];
+  }
+
+  /*
+  used in : 
+  1-search
+  3-trendy gifs
+  4-stickers
+  */
+  searchForGifsAndStickers(String query) async {
+    try {
+      Response response =
+          await dio!.get(searchUrl, queryParameters: {'search': 'animals'});
+      print("ffffffffffffffffffffff   " + response.realUri.toString());
+      GifsModel searchedData = GifsModel.fromJson(response.data);
+      return searchedData.data as List;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString() + "ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrrr");
+      }
+    }
     return [];
   }
 }
