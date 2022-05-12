@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gif_project/constant/strings.dart';
-import 'package:gif_project/controller/cubit/all_categories_cubit.dart';
-import 'package:gif_project/controller/cubit/home_cubit.dart';
-import 'package:gif_project/controller/cubit/stickers_view_cubit.dart';
-import 'package:gif_project/controller/cubit/trendy_gifs_cubit.dart';
-import 'package:gif_project/controller/cubit/view_gifs_cubit.dart';
+import 'package:gif_project/controller/cubit/categories_controllers/all_categories_cubit.dart';
+import 'package:gif_project/controller/cubit/home_controller/home_cubit.dart';
+import 'package:gif_project/controller/cubit/stickers_controller/stickers_view_cubit.dart';
+import 'package:gif_project/controller/cubit/trendy_gifs_controller/trendy_gifs_cubit.dart';
+import 'package:gif_project/controller/cubit/gif_view_controller/view_gifs_cubit.dart';
+import 'package:gif_project/data/model/category_model.dart';
 import 'package:gif_project/data/repository/gif_view_repository.dart';
 import 'package:gif_project/data/web_service/gif_view_web_services.dart';
 import 'package:gif_project/view/screen/all_categories_screen.dart';
+import 'package:gif_project/view/screen/gif_details_screen.dart';
 import 'package:gif_project/view/screen/gif_view_screen.dart';
 import 'package:gif_project/view/screen/home_screen.dart';
 import 'package:gif_project/view/screen/stickers_view_screen.dart';
@@ -70,6 +72,10 @@ class AppRouter {
             child: const StickersScreen(),
           ),
         );
+      case gifDetailsScreenRoute:
+        final arg = settings.arguments as List<dynamic>;
+        return MaterialPageRoute(
+            builder: (_) => GifDetailsScreen(gifData: arg));
     }
     return null;
   }

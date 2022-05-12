@@ -3,6 +3,7 @@ import 'package:gif_project/constant/colors.dart';
 import 'package:gif_project/router.dart';
 
 void main(List<String> args) {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp(
     appRouter: AppRouter(),
   ));
@@ -14,6 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: primaryColor,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       debugShowCheckedModeBanner: false,
       color: primaryColor,
       showSemanticsDebugger: false,

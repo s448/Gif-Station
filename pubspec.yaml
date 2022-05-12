@@ -14,6 +14,10 @@ dependencies:
   flutter_offline: ^2.1.0
   dio: ^4.0.6
   anim_search_bar: ^2.0.2
+  path_provider: ^2.0.10
+  permission_handler: ^9.2.0
+  downloads_path_provider_28: ^0.1.2
+  intl: ^0.17.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,4 @@
-part of './trendy_gifs_cubit.dart';
+part of 'trendy_gifs_cubit.dart';
 
 @immutable
 abstract class TrendyGifsState {}

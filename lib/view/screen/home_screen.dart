@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gif_project/constant/strings.dart';
 import 'package:gif_project/constant/styles.dart';
-import 'package:gif_project/controller/cubit/home_cubit.dart';
+import 'package:gif_project/controller/cubit/home_controller/home_cubit.dart';
 import 'package:gif_project/view/widget/home_button.dart';
 import 'package:gif_project/view/widget/search_bar.dart';
 

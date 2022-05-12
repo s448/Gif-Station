@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gif_project/controller/cubit/view_gifs_cubit.dart';
+import 'package:gif_project/controller/cubit/gif_view_controller/view_gifs_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
 class GifViewScreen extends StatefulWidget {

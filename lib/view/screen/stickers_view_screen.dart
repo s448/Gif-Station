@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gif_project/controller/cubit/stickers_view_cubit.dart';
+import 'package:gif_project/controller/cubit/stickers_controller/stickers_view_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
 class StickersScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _StickersScreenState extends State<StickersScreen> {
     //now let's initialize the cubit to call our we service
     setState(() {
       allStickers =
-          BlocProvider.of<StickersViewCubit>(context).getStickers("10");
+          BlocProvider.of<StickersViewCubit>(context).getStickers("1");
     });
   }
 
