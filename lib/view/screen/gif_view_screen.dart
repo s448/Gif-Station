@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif_project/constant/styles.dart';
 import 'package:gif_project/controller/cubit/gif_view_controller/view_gifs_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
@@ -43,7 +44,11 @@ class _GifViewScreenState extends State<GifViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(query.toString()),
+        title: Text(
+          //Capitalizing the app bar text
+          "${query[0].toUpperCase()}${query.substring(1).toLowerCase()}",
+          style: appBarStyle,
+        ),
       ),
       body: BlocBuilder<ViewGifsCubit, ViewGifsState>(
         builder: (context, state) {

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif_project/constant/styles.dart';
 import 'package:gif_project/controller/cubit/stickers_controller/stickers_view_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
 
@@ -36,7 +37,10 @@ class _StickersScreenState extends State<StickersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Stickers"),
+        title: Text(
+          "Stickers",
+          style: appBarStyle,
+        ),
       ),
       body: BlocBuilder<StickersViewCubit, StickersViewState>(
         builder: (context, state) {

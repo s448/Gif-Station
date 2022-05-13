@@ -14,18 +14,20 @@ class GifItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (() async {
-        print(allGifs[0]);
+        print(allGifs[i]);
         Navigator.pushNamed(
           context,
           gifDetailsScreenRoute,
           arguments: <dynamic>[
-            allGifs[i].username ?? "none-0",
-            allGifs[i].images.original.webp ?? "none-1",
-            allGifs[i].title ?? "none-2",
-            allGifs[i].importDatetime ?? "none-3",
-            allGifs[i].user.avatarUrl ?? "none-4",
-            allGifs[i].user.isVerified ?? "none-5",
-            allGifs[i].images.original.size ?? "none-6",
+            allGifs[i].username ?? "USERNAME-UNLNOWN",
+            allGifs[i].images.original.url ??
+                "https://www.gstatic.com/webp/gallery/3.sm.webp",
+            allGifs[i].title ?? "TITLE-UNKNOWN",
+            allGifs[i].importDatetime ?? "DATE-UNKNOWN",
+            allGifs[i].user.avatarUrl!,
+            allGifs[i].user.isVerified ?? false,
+            allGifs[i].images.original.size ??
+                "https://img.icons8.com/ios/344/gif--v2.gif",
           ],
         );
       }),

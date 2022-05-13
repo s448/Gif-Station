@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gif_project/constant/colors.dart';
+import 'package:gif_project/constant/styles.dart';
 
 class SearchBar extends StatelessWidget {
   final Function(String value) onSubmit;
@@ -23,6 +24,7 @@ class SearchBar extends StatelessWidget {
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: "Search for Gifs..",
+            hintStyle: hintStyle,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade400),
               borderRadius: BorderRadius.circular(25.0),

@@ -533,63 +533,65 @@ class Looping {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['mp4_size'] = this.mp4Size;
-    data['mp4'] = this.mp4;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['mp4_size'] = mp4Size;
+    data['mp4'] = mp4;
     return data;
   }
 }
 
 class User {
-  String? avatarUrl;
-  String? bannerImage;
-  String? bannerUrl;
-  String? profileUrl;
-  String? username;
-  String? displayName;
-  String? description;
-  String? instagramUrl;
-  String? websiteUrl;
-  bool? isVerified;
+  User({
+    required this.avatarUrl,
+    required this.bannerImage,
+    required this.bannerUrl,
+    required this.profileUrl,
+    required this.username,
+    required this.displayName,
+    required this.description,
+    required this.instagramUrl,
+    required this.websiteUrl,
+    required this.isVerified,
+  });
+  late final String avatarUrl;
+  late final String bannerImage;
+  late final String bannerUrl;
+  late final String profileUrl;
+  late final String username;
+  late final String displayName;
+  late final String description;
+  late final String instagramUrl;
+  late final String websiteUrl;
+  late final bool isVerified;
 
-  User(
-      {this.avatarUrl,
-      this.bannerImage,
-      this.bannerUrl,
-      this.profileUrl,
-      this.username,
-      this.displayName,
-      this.description,
-      this.instagramUrl,
-      this.websiteUrl,
-      this.isVerified});
-
-  User.fromJson(Map<String, dynamic> json) {
-    avatarUrl = json['avatar_url'];
-    bannerImage = json['banner_image'];
-    bannerUrl = json['banner_url'];
-    profileUrl = json['profile_url'];
-    username = json['username'];
-    displayName = json['display_name'];
-    description = json['description'];
-    instagramUrl = json['instagram_url'];
-    websiteUrl = json['website_url'];
-    isVerified = json['is_verified'];
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      avatarUrl: json['avatar_url'] ?? "",
+      bannerImage: json['banner_image'] ?? "",
+      bannerUrl: json['banner_url'] ?? "",
+      profileUrl: json['profile_url'] ?? "",
+      username: json['username'] ?? "",
+      displayName: json['display_name'] ?? "",
+      description: json['description'] ?? "",
+      instagramUrl: json['instagram_url'] ?? "",
+      websiteUrl: json['website_url'] ?? "",
+      isVerified: json['is_verified'] ?? false,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['avatar_url'] = this.avatarUrl;
-    data['banner_image'] = this.bannerImage;
-    data['banner_url'] = this.bannerUrl;
-    data['profile_url'] = this.profileUrl;
-    data['username'] = this.username;
-    data['display_name'] = this.displayName;
-    data['description'] = this.description;
-    data['instagram_url'] = this.instagramUrl;
-    data['website_url'] = this.websiteUrl;
-    data['is_verified'] = this.isVerified;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['avatar_url'] = avatarUrl;
+    _data['banner_image'] = bannerImage;
+    _data['banner_url'] = bannerUrl;
+    _data['profile_url'] = profileUrl;
+    _data['username'] = username;
+    _data['display_name'] = displayName;
+    _data['description'] = description;
+    _data['instagram_url'] = instagramUrl;
+    _data['website_url'] = websiteUrl;
+    _data['is_verified'] = isVerified;
+    return _data;
   }
 }
 
@@ -601,24 +603,21 @@ class Analytics {
   Analytics({this.onload, this.onclick, this.onsent});
 
   Analytics.fromJson(Map<String, dynamic> json) {
-    onload =
-        json['onload'] != null ? new Onload.fromJson(json['onload']) : null;
-    onclick =
-        json['onclick'] != null ? new Onload.fromJson(json['onclick']) : null;
-    onsent =
-        json['onsent'] != null ? new Onload.fromJson(json['onsent']) : null;
+    onload = json['onload'] != null ? Onload.fromJson(json['onload']) : null;
+    onclick = json['onclick'] != null ? Onload.fromJson(json['onclick']) : null;
+    onsent = json['onsent'] != null ? Onload.fromJson(json['onsent']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.onload != null) {
-      data['onload'] = this.onload!.toJson();
+      data['onload'] = onload!.toJson();
     }
     if (this.onclick != null) {
-      data['onclick'] = this.onclick!.toJson();
+      data['onclick'] = onclick!.toJson();
     }
     if (this.onsent != null) {
-      data['onsent'] = this.onsent!.toJson();
+      data['onsent'] = onsent!.toJson();
     }
     return data;
   }

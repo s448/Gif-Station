@@ -18,6 +18,10 @@ dependencies:
   permission_handler: ^9.2.0
   downloads_path_provider_28: ^0.1.2
   intl: ^0.17.0
+  share_plus: ^4.0.4
+  google_fonts: ^2.3.2
+  get: ^4.6.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

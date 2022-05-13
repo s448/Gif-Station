@@ -1,3 +1,4 @@
+//the three buttons' atributes [name , image path , description]
 List homeButtonsData = [
   {
     'name': 'Trending',

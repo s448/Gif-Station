@@ -1,69 +1,50 @@
 //here the web services of sharing & downloading the gifs and stickers
-
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gif_project/constant/colors.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ShareMediaServices {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   //return the directory where the file should be saved
   Future<String> getFilePath(uniqueFileName) async {
-    String path = '';
+    var status = await Permission.storage.status;
 
-    Directory? dir = await DownloadsPathProvider.downloadsDirectory;
-    path = '${dir!.path}/$uniqueFileName.webp';
+    if (!status.isGranted) {
+      Permission.storage.request();
+    }
+    String path = '';
+    String dir = "/storage/emulated/0";
+    //await DownloadsPathProvider.downloadsDirectory;
+    path = '$dir/GifStation/$uniqueFileName.webp';
     if (kDebugMode) {
-      print(path);
+      print(">>>>>>>" + path);
     }
     return path;
   }
 
-  //download the file to the app directory in local file storage
-  Future<void> downloadMedia(url, fileName) async {
+  //share the downloaded media
+  Future<void> shareMedia(url, fileName) async {
     Dio dio = Dio();
     String savePath = await getFilePath(fileName);
-    dio.download(url, savePath, deleteOnError: true,
-        onReceiveProgress: (rcv, total) {
-      print(
-          'received: ${rcv.toStringAsFixed(0)} out of total: ${total.toStringAsFixed(0)}');
-    }).then((value) => print("<<<<<<<<Done>>>>>>>>"));
+    await dio.download(url, savePath,
+        deleteOnError: true, onReceiveProgress: (rcv, total) {});
+    Share.shareFiles([savePath], text: fileName);
   }
 
-  // //create visible directory to save the media inside it
-  // Future<String> createFolderInAppDocDir(String folderName) async {
-  //   //ask for a permission to get access to the external storage
-  //   var status = await Permission.storage.status;
-  //   if (!status.isGranted) {
-  //     //requiest for access permissions
-  //     await Permission.storage.request();
-  //   }
-
-  //   //App Document Directory + folder name
-  //   if (status.isGranted) {
-  //     final Directory _appDocDirFolder = Directory('/data/user/0/$folderName/');
-
-  //     if (await _appDocDirFolder.exists()) {
-  //       //if folder already exists return path
-  //       print(_appDocDirFolder);
-  //       return _appDocDirFolder.path;
-  //     } else {
-  //       try {
-  //         //if folder not exists create folder and then return its path
-  //         final Directory _appDocDirNewFolder =
-  //             await _appDocDirFolder.create(recursive: true);
-  //         print(_appDocDirFolder);
-  //         return _appDocDirNewFolder.path;
-  //       } catch (e) {
-  //         print("ERROR>>>" + e.toString());
-  //         print(status);
-  //         return "";
-  //       }
-  //     }
-  //   } else {
-  //     print('permission denyed');
-  //     return "error";
-  //   }
-  // }
+  Future<bool> checkFileExist(path) async {
+    bool directoryExists = await Directory(path).exists();
+    bool fileExists = await File(path).exists();
+    if (directoryExists || fileExists) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

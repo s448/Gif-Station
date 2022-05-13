@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gif_project/constant/styles.dart';
 import 'package:gif_project/data/model/lists_of_data.dart';
 
 class HomeButton extends StatelessWidget {
@@ -28,11 +29,17 @@ class HomeButton extends StatelessWidget {
                     thickness: 2.0,
                     indent: 5,
                   ),
-                  Text(homeButtonsData[index]['name'])
+                  Text(
+                    homeButtonsData[index]['name'],
+                    style: boldStyle,
+                  )
                 ],
               ),
             ),
-            Text(homeButtonsData[index]['description'].toString())
+            Text(
+              homeButtonsData[index]['description'].toString(),
+              style: traditionalStyle,
+            )
           ],
         ),
       ),

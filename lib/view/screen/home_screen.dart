@@ -40,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gif Station'),
+        title: Text(
+          'Gif Station',
+          style: appBarStyle,
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -50,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 25,
+                height: 18,
               ),
               //there is a listener in initState to listen for changes
               // so as no need for onChanged()
@@ -63,9 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       arguments: query,
                     )),
               ),
+              const SizedBox(
+                height: 18,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "Categories",
                     style: boldStyle,
@@ -129,8 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: double.infinity,
                                   alignment: Alignment.bottomCenter,
                                   child: Text(
-                                    allCategories[index].name,
-                                    style: const TextStyle(color: Colors.white),
+                                    //Capitalizing the name
+                                    "${allCategories[index].name[0].toUpperCase()}${allCategories[index].name.substring(1).toLowerCase()}",
+                                    style: categoryStyle,
                                   ),
                                 ),
                               ),
@@ -150,13 +157,25 @@ class _HomeScreenState extends State<HomeScreen> {
               //to navigate to a screen include all the categories
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, allCategoriesRoute,
                           arguments: '40');
                     },
-                    child: const Text("see all categories >"),
+                    child: Row(
+                      children: [
+                        Text(
+                          "See all categories",
+                          style: seeAllCategoriesButtonStyle,
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

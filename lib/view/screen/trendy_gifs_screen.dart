@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gif_project/constant/styles.dart';
 import 'package:gif_project/controller/cubit/trendy_gifs_controller/trendy_gifs_cubit.dart';
 import 'package:gif_project/controller/cubit/gif_view_controller/view_gifs_cubit.dart';
 import 'package:gif_project/view/widget/gif_item.dart';
@@ -34,7 +35,10 @@ class _TrendyGifsState extends State<TrendyGifs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Trendy Gifs"),
+        title: Text(
+          "Trendy Gifs",
+          style: appBarStyle,
+        ),
       ),
       body: BlocBuilder<TrendyGifsCubit, TrendyGifsState>(
         builder: (context, state) {
