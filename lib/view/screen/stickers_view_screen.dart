@@ -22,7 +22,7 @@ class _StickersScreenState extends State<StickersScreen> {
     //now let's initialize the cubit to call our we service
     setState(() {
       allStickers =
-          BlocProvider.of<StickersViewCubit>(context).getStickers("1");
+          BlocProvider.of<StickersViewCubit>(context).getStickers("1000");
     });
   }
 

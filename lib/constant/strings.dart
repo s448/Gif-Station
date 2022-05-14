@@ -15,3 +15,8 @@ const allCategoriesRoute = './all_categories';
 const trendyGifsScreenRoute = './trendy_gifs_screen';
 const stickersScreenRoute = './sticker_view_screen';
 const gifDetailsScreenRoute = './gif_details_screen';
+
+//app url
+
+const String appUrl =
+    "https://play.google.com/store/apps/details?id=com.saidmodev.gifstation";

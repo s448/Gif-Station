@@ -20,7 +20,7 @@ class _TrendyGifsState extends State<TrendyGifs> {
     super.initState();
     //now let's initialize the cubit to call our we service
     setState(() {
-      allGifs = BlocProvider.of<TrendyGifsCubit>(context).getTrendyGifs("1");
+      allGifs = BlocProvider.of<TrendyGifsCubit>(context).getTrendyGifs("1000");
     });
   }
 

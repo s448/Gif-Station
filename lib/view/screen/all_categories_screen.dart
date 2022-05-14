@@ -18,7 +18,7 @@ class _AllCategoriesState extends State<AllCategories> {
     super.initState();
     setState(() {
       allCategories =
-          BlocProvider.of<AllCategoriesCubit>(context).getAllCategories('1');
+          BlocProvider.of<AllCategoriesCubit>(context).getAllCategories('150');
     });
   }
 

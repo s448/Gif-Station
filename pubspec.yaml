@@ -21,11 +21,29 @@ dependencies:
   share_plus: ^4.0.4
   google_fonts: ^2.3.2
   get: ^4.6.1
-  
+  url_launcher: ^6.1.2
+  flutter_native_splash: ^2.1.6
+  google_mobile_ads: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.0 
+  change_app_package_name: ^1.0.0
+  icons_launcher: ^1.1.7
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/logo.png
+  android: true
+  ios: true
+
+
+flutter_icons:
+  image_path: 'assets/images/logo.png'
+  ios: true
+  android: true
+
 flutter:
   uses-material-design: true
   assets:

@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gif_project/constant/colors.dart';
 import 'package:gif_project/constant/styles.dart';
+import 'package:gif_project/data/admob_helper/admob_helper.dart';
 import 'package:gif_project/data/web_service/format_size.dart';
 import 'package:gif_project/data/web_service/share_media_services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 
 class GifDetailsScreen extends StatefulWidget {
@@ -29,13 +32,60 @@ class GifDetailsScreen extends StatefulWidget {
 */
 
 class _GifDetailsScreenState extends State<GifDetailsScreen> {
+  //ADMOB REWARD ADS
+  // TODO: Add _rewardedAd
+  late RewardedAd rewardedAd;
+  bool isRewardedAdReady = false;
+
+  void loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AdmobHelper.adRewardId,
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          if (kDebugMode) {
+            print("____________________________ADLOADDED________");
+          }
+          rewardedAd = ad;
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              setState(() {
+                isRewardedAdReady = false;
+              });
+              loadRewardedAd();
+            },
+          );
+
+          setState(() {
+            isRewardedAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          if (kDebugMode) {
+            print(
+                "____________________________AD FAILED TO LOAD ????????????________");
+          }
+          if (kDebugMode) {
+            print('Failed to load a rewarded ad: ${err.message}');
+          }
+          setState(() {
+            isRewardedAdReady = false;
+          });
+        },
+      ),
+    );
+  }
+
   //for the download listener >>
   String downloadinMsg = "downloading...";
   bool isDownlaoding = false;
   bool isDownloaded = false;
   int percentage = 0;
   //download the file to the app directory in local file storage
-  Future<void> downloadMedia(url, fileName, BuildContext context) async {
+  Future<void> downloadMedia(
+    url,
+    fileName,
+  ) async {
     Dio dio = Dio();
     String savePath = await ShareMediaServices().getFilePath(fileName);
     try {
@@ -45,24 +95,13 @@ class _GifDetailsScreenState extends State<GifDetailsScreen> {
           isDownlaoding = true;
         });
         percentage = (rcv / total * 100).floor();
-        print(percentage);
       }).then((value) {
         setState(() {
           isDownlaoding = false;
         });
       }).then((value) async {
-        bool directoryExists = await Directory(savePath).exists();
-        bool fileExists = await File(savePath).exists();
-        if (directoryExists || fileExists) {
-          setState(() {
-            print("EXIST");
-            setState(() {
-              isDownloaded = true;
-            });
-          });
-        } else {
-          print("NOT EXIST");
-        }
+        //check existence
+        checkExist(savePath);
       });
     } catch (e) {
       Get.dialog(SimpleDialog(
@@ -71,12 +110,28 @@ class _GifDetailsScreenState extends State<GifDetailsScreen> {
     }
   }
 
+  checkExist(savePath) async {
+    bool directoryExists = await Directory(savePath).exists();
+    bool fileExists = await File(savePath).exists();
+    if (directoryExists || fileExists) {
+      setState(() {
+        setState(() {
+          isDownloaded = true;
+        });
+      });
+    } else {
+      if (kDebugMode) {
+        print("NOT EXIST");
+      }
+    }
+  }
+
   final List<dynamic> gifsData;
   String size = "";
   @override
   void initState() {
     super.initState();
-
+    loadRewardedAd();
     //convert the byte size to mb or kb
     setState(() {
       size = FormatSize().formatBytes(int.parse(gifsData[6]), 1);
@@ -164,11 +219,17 @@ class _GifDetailsScreenState extends State<GifDetailsScreen> {
               constraints: BoxConstraints(
                   minWidth: MediaQuery.of(context).size.width, minHeight: 20.0),
               child: ElevatedButton(
-                onPressed: (() => downloadMedia(
-                      gifsData[1],
-                      gifsData[2],
-                      context,
-                    )),
+                onPressed: (() {
+                  if (isRewardedAdReady) {
+                    rewardedAd.show(onUserEarnedReward: ((ad, reward) {
+                      //download the gif
+                      downloadMedia(gifsData[1], gifsData[2]);
+                    }));
+                  } else {
+                    //download the gif
+                    downloadMedia(gifsData[1], gifsData[2]);
+                  }
+                }),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -198,12 +259,17 @@ class _GifDetailsScreenState extends State<GifDetailsScreen> {
               constraints: BoxConstraints(
                   minWidth: MediaQuery.of(context).size.width, minHeight: 20.0),
               child: ElevatedButton(
-                onPressed: (() =>
+                onPressed: (() {
+                  if (isRewardedAdReady) {
+                    rewardedAd.show(onUserEarnedReward: ((ad, reward) {
+                      //download and share the gif
+                      ShareMediaServices().shareMedia(gifsData[1], gifsData[2]);
+                    }));
+                  } else {
                     //download and share the gif
-                    ShareMediaServices().shareMedia(
-                      gifsData[1],
-                      gifsData[2],
-                    )),
+                    ShareMediaServices().shareMedia(gifsData[1], gifsData[2]);
+                  }
+                }),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -227,7 +293,7 @@ class _GifDetailsScreenState extends State<GifDetailsScreen> {
             ),
             isDownlaoding
                 ? Text(
-                    downloadinMsg + " " + percentage.toString(),
+                    downloadinMsg + " " + percentage.toString() + "%",
                     style: traditionalStyle,
                   )
                 : const SizedBox(),

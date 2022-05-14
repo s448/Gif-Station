@@ -1,4 +1,4 @@
-package com.example.gif_project
+package com.saidmodev.gifstation
 
 import io.flutter.embedding.android.FlutterActivity
 
