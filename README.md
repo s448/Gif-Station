@@ -7,8 +7,6 @@ an application for searching ,sharing and downloading gifs from giphy platform
 </h2>
 
 <h1>Screens</h1>
-<img src='https://play-lh.googleusercontent.com/DtJm2XGDHAaT4cbrsxzLdommLHfLBffbpQUZ6dwgdZl9p2A04pL4CGRvU-rE1i7mP90S=w1366-h667-rw
-'></img>
 https://play-lh.googleusercontent.com/DtJm2XGDHAaT4cbrsxzLdommLHfLBffbpQUZ6dwgdZl9p2A04pL4CGRvU-rE1i7mP90S=w1366-h667-rw
 https://play-lh.googleusercontent.com/iUcueFIyUDpi08NzVfN7IzQcb9gw6fsrgT2jsfBEby-zv1oZ2k0Od0JlFP9-RU3Eyzce=w720-h310-rw
 https://play-lh.googleusercontent.com/74EkP4UpqC7UboHECeQPzG1qKzpEJxL5shFv8OHJmStQTwWAZrluLbyYJcHsVfjBj5g=w720-h310-rw
