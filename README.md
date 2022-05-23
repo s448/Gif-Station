@@ -1,8 +1,10 @@
 <h1 style="text-align:center;">GIF Station</h1>
 <h2>
   This Flutter Project was built on BloC State management Principles
-  Used Used GIPHY platform search  engine API for web services
 </h2>
+<h1>
+  Used GIPHY platform search  engine API for web services
+</h1>
 
 <h1>Screens</h1>
 <img src="https://play-lh.googleusercontent.com/DtJm2XGDHAaT4cbrsxzLdommLHfLBffbpQUZ6dwgdZl9p2A04pL4CGRvU-rE1i7mP90S=w1366-h667-rw"/>
