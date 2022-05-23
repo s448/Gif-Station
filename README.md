@@ -2,6 +2,12 @@
 <h2>
   This Flutter Project was built on BloC State management Principles
 </h2>
+<h4>
+  State Management : Bloc
+</h4>
+<h4>
+  Web Services : Dio
+</h4>
 <h2>
   Used GIPHY platform search  engine API for web services
 </h2>
