@@ -2,9 +2,9 @@
 <h2>
   This Flutter Project was built on BloC State management Principles
 </h2>
-<h1>
+<h2>
   Used GIPHY platform search  engine API for web services
-</h1>
+</h2>
 
 <h1>Screens</h1>
 <img src="https://play-lh.googleusercontent.com/DtJm2XGDHAaT4cbrsxzLdommLHfLBffbpQUZ6dwgdZl9p2A04pL4CGRvU-rE1i7mP90S=w1366-h667-rw"/>
@@ -26,3 +26,8 @@
  <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white"/>
 </a>
 
+<body>
+    <div style="width:800px; margin:0 auto;">
+        centered content
+    </div>
+</body>
