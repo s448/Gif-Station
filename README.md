@@ -1,6 +1,4 @@
-# Gif-Station
-an application for searching ,sharing and downloading gifs from giphy platform
-
+<h1 style="text-align:center;">GIF Station</h1>
 <h2>
   This Flutter Project was built on BloC State management Principles
   Used Used GIPHY platform search  engine API for web services
